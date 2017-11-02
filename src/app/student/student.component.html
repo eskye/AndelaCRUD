@@ -1,0 +1,71 @@
+<div class="row"></div>
+<br/><br>
+<div class="container">
+  <br/><br>
+  <br/><br>
+  <div class="row">
+    <div class="col-md-7">
+      <form #for = "ngForm">
+        <div class="row">
+          <div class="col-md-12"> <flash-messages></flash-messages></div>
+          <div class="col-md-6 mb-3">
+
+            <label >First name</label>
+            <input type="text" class="form-control" [(ngModel)]="student.firstname" name="firstname" required="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label >Last name</label>
+            <input type="text" class="form-control" [(ngModel)]="student.lastname" name="lastname" required="">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label >Email</label>
+            <input type="text" class="form-control" [(ngModel)]="student.email" name="email"required="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label >State of Origin</label>
+            <input type="text" class="form-control" [(ngModel)]="student.state" name="State" required="">
+          </div>
+
+        </div>
+        <div class="row">
+
+
+          <div class="col-md-6 mb-3">
+            <label >Mobile Number</label>
+            <input type="text" class="form-control" [(ngModel)]="student.phone" name="Phone" required="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>Gender</label>
+            <select name="gender" [(ngModel)]="student.gender" class="form-control">
+              <option></option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label >Address</label>
+            <input type="text" class="form-control" [(ngModel)]="student.address" name="Address" required="">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label >Course</label>
+            <input type="text" class="form-control" [(ngModel)]="student.course" name="course" required="">
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" [disabled]="!for.valid" (click)="updateStudent()" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
