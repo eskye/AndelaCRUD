@@ -2,12 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://localhost:27017/School');
-//var db = mongojs('mongodb://sunkee:temitope@ds231715.mlab.com:31715/andela');
+//var db = mongojs('mongodb://localhost:27017/School');
+var db = mongojs('mongodb://sunkee:temitope@ds231715.mlab.com:31715/andela');
 
 var STUDENTS_COLLECTION = "Students";
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 var app = express();
 app.use(cors());
@@ -27,16 +27,16 @@ app.use(function(req, res, next) {
 
 
 //Initialize the app
-var server = app.listen(port, function() {
-    var port = server.address().port;
-    console.log("App now running on port", port);
+var server = app.listen(process.env.PORT || 5000, function() {
+    var port = this.address().port;
+    console.log("App now running on port", port, app.settings.env);
 });
 
 //GENERIC error handler used by all endpoints.
 
 function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
-    res.status(code || 500).json({ "error": message });
+    return res.status(code || 500).json({ "error": message });
 
 }
 /*"/api/students"
@@ -50,7 +50,7 @@ app.get("/api/students", function(req, res, next) {
         if (err) {
             handleError(res, err.message, "Failed to get Students.");
         } else {
-            res.status(200).json(students);
+            return res.status(200).json(students);
 
         }
     });
@@ -68,7 +68,7 @@ app.post('/api/students', function(req, res, next) {
         if (err) {
             handleError(res, err.message, "Failed to create student.");
         } else {
-            res.status(201).json(student.ops[0]);
+            return res.status(201).json(student.ops[0]);
         }
 
     });

@@ -10,21 +10,21 @@ import {FlashMessagesService} from "angular2-flash-messages/module";
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
-  student:Student;
-  constructor(private route:ActivatedRoute, private rout: Router,private service:StudentService) {
+  student: Student;
+  constructor(private route: ActivatedRoute, private rout: Router, private service: StudentService) {
     this.student = new Student();
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params =>{
-      let id = params.get('id');
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
        this.service.getById(id).subscribe(student => {
           this.student = student;
        });
     });
   }
 
-  updateStudent(){
+  updateStudent() {
     this.service.updateStudent(this.student).subscribe(res => {
       this.rout.navigate(['/']);
     });

@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   students: Student[];
   student: Student;
 
-  constructor(private service: StudentService,private route:Router,private flash:FlashMessagesService) {
+  constructor(private service: StudentService, private route: Router, private flash: FlashMessagesService) {
     this.student = new Student();
   }
 
@@ -25,16 +25,15 @@ export class HomeComponent implements OnInit {
   }
 
   addStudent(student) {
-console.log(student);
-    var validate = this.service.validate(student);
-    if(!validate){
-      this.flash.show("Please fill all the fields..",{cssClass:'alert-danger',timeout:3000});
+    const validate = this.service.validate(student);
+    if (!validate) {
+      this.flash.show('Please fill all the fields..', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
     this.service.saveStudent(student).subscribe(res => {
       this.student = student;
       this.students.push(this.student);
-      this.flash.show("Success",{cssClass:'alert alert-success',timeout:3000});
+      this.flash.show('Success', {cssClass: 'alert alert-success', timeout: 3000});
 
       this.clearFields(student);
       this.route.navigate(['/']);
@@ -43,23 +42,15 @@ console.log(student);
   }
 
 
-  updateStudent(id) {
-    console.log(id);
-  }
-
   removeStudent(student) {
-    let index = this.students.indexOf(student);
+    const index = this.students.indexOf(student);
     alert(index);
-    this.students.splice(index,1);
+    this.students.splice(index, 1);
     this.service.removeStudent(student._id).subscribe(res => {
       console.log(res);
-      this.flash.show("Deleted Successfully", {cssClass:'alert-success',timeout:4000});
+      this.flash.show('Deleted Successfully', {cssClass: 'alert-success', timeout: 4000});
     });
 
-
-  }
-
-  detailsStudent(id) {
 
   }
 
@@ -67,11 +58,10 @@ console.log(student);
   private getStudent() {
     this.service.getStudents().subscribe(students => {
       this.students = students;
-
     });
   }
 
-  private clearFields(student){
+  private clearFields(student) {
 
     student.firstname = "";
       student.lastname = "";
